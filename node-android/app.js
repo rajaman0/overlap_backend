@@ -15,6 +15,11 @@ app.use(connect.urlencoded());
 
 require('./routes/routes.js')(app);
 
-app.listen(port);
+var server = app.listen(port);
+var io = require('socket.io').listen(server);
+
+io.on('connection', function(socket){
+  console.log("connection with socket");
+});
 
 console.log('The App runs on port ' + port);
